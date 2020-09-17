@@ -2,6 +2,7 @@ import io
 import logging
 import os
 import warnings
+import sys
 from hashlib import sha256
 from glob import has_magic
 
@@ -1364,7 +1365,7 @@ class AbstractBufferedFile(io.IOBase):
 
         https://docs.python.org/3/library/io.html#io.RawIOBase.readinto
         """
-        data = self.read(len(b))
+        data = self.read(len(b)*sys.getsizeof(b))
         memoryview(b).cast("B")[: len(data)] = data
         return len(data)
 
