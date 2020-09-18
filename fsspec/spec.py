@@ -1365,7 +1365,7 @@ class AbstractBufferedFile(io.IOBase):
 
         https://docs.python.org/3/library/io.html#io.RawIOBase.readinto
         """
-        data = self.read(len(b)*sys.getsizeof(b))
+        data = self.read(len(bytearray(b)))
         memoryview(b).cast("B")[: len(data)] = data
         return len(data)
 
